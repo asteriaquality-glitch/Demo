@@ -1,0 +1,2068 @@
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quality Control</title>
+
+    <style>
+        #passwordOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 51, 102, 0.95);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+	#passwordOverlay input {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            margin-right: 10px;
+        }
+
+        #passwordOverlay button {
+            padding: 12px 18px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #4facfe;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #passwordOverlay button:hover {
+            background: #43e97b;
+        }
+
+	
+ 	body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #78c7ff, #d0eaff);
+            transition: 0.4s ease;
+        }
+
+	.header {
+            text-align: center;
+            padding: 18px 0;
+            background: rgba(0, 51, 102, 0.7);
+            backdrop-filter: blur(8px);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+	.header h1 {
+            margin: 0;
+            font-size: 32px;
+            letter-spacing: 1px;
+            animation: headerGlow 2s infinite alternate ease-in-out;
+        }
+        @keyframes headerGlow {
+            from {
+                text-shadow: 0 0 7px #9bd1ff;
+            }
+
+            to {
+                text-shadow: 0 0 14px #ffffff;
+            }
+        }
+
+        .marquee-container {
+            background: #c00808;
+            color: white;
+            padding: 9px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            user-select: none;
+        }
+	.marquee-container span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scrollBanner 25s linear infinite;
+        }
+
+	.marquee-container:hover span {
+        animation-play-state: paused;
+	}
+	
+	.marquee-container span {
+        padding-left: 100%;
+        white-space: nowrap;
+        }
+	
+	  @keyframes scrollBanner {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+	.home-btn {
+    padding: 14px 28px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #003366, #0059b3);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    width: 220px;
+    transition: 0.3s ease;
+}
+
+.home-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #0059b3, #003366);
+}
+
+
+.feedback-pill{
+
+    position:fixed;
+
+    top:28px;
+
+    right:28px;
+
+    z-index:10000;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:12px 18px;
+
+    border:none;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    letter-spacing:.4px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(14px);
+
+    -webkit-backdrop-filter:blur(14px);
+
+    border:1px solid rgba(255,255,255,.22);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.25);
+
+    transition:all .35s ease;
+
+    animation:feedbackFloat 3s ease-in-out infinite;
+
+}
+
+.feedback-pill:hover{
+
+    transform:translateY(-4px) scale(1.03);
+
+    background:rgba(255,255,255,.20);
+
+    box-shadow:
+        0 0 25px rgba(79,172,254,.65);
+
+}
+
+
+
+.feedback-text{
+
+    white-space:nowrap;
+
+}
+
+@keyframes feedbackFloat{
+
+    0%,100%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-3px);
+
+    }
+
+}
+
+
+        .toggle-theme {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #003366, #0059b3);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .toggle-theme:hover {
+            transform: scale(1.05);
+        }
+	.box {
+            width: 90%;
+            margin: 25px auto;
+            padding: 22px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            animation: fadeSlide 0.8s ease;
+        }
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .box h2 {
+            text-align: center;
+            font-size: 22px;
+            margin: 0;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+            color: #003366;
+        }
+
+        
+        .collapsible {
+            background: linear-gradient(135deg, #003366, #0059b3);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            width: 85%;
+            margin: 15px auto;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            transition: 0.3s ease;
+        }
+
+        .collapsible:hover {
+            transform: scale(1.02);
+        }
+
+        .content {
+            display: none;
+            width: 80%;
+            margin: 0 auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            animation: dropAnim 0.4s ease;
+        }
+
+        @keyframes dropAnim {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+         .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .card {
+            width: 230px;
+            height: 110px;
+            border-radius: 14px;
+            background: rgba(0, 51, 102, 0.75);
+            backdrop-filter: blur(8px);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+	    text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0 18px rgba(0, 110, 255, 0.8);
+            background: rgba(0, 51, 102, 0.95);
+        }
+
+        .topBtn {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            background: rgba(0, 51, 102, 0.85);
+            border: none;
+            padding: 14px;
+            border-radius: 50%;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+            display: flex;
+            transition: 0.3s ease;
+        }
+
+        .topBtn:hover {
+            transform: scale(1.1);
+        }
+
+
+        body.dark-mode {
+            background: #0f0f0f;
+            color: white;
+        }
+
+        body.dark-mode .box {
+            background: rgba(40, 40, 40, 0.7);
+        }
+
+        body.dark-mode .card {
+            background: rgba(10, 10, 10, 0.8);
+        }
+
+.search-wrapper {
+    position: relative;
+    width: 75%;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 12px 40px 12px 12px; 
+    border-radius: 8px;
+    border: 1px solid #999;
+    font-size: 16px;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: gray;
+    cursor: pointer;
+    display: none; 
+}
+
+.clear-btn:hover {
+    color: #c00808;
+}
+
+
+.landing {
+    height: 100vh;
+    background: linear-gradient(
+        135deg,
+        #001f3f,
+        #003366,
+        #004c99
+    );
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top,
+        rgba(255,255,255,0.08),
+        transparent 60%
+    );
+}
+
+.landing-content {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 2;
+    width: 90%;
+    max-width: 1100px;
+}
+
+.landing-title {
+    font-size: 42px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.landing-subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 40px;
+}
+
+.qc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.qc-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 30px 20px;
+    cursor: pointer;
+    transition: 0.4s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.qc-card h2 {
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.qc-card p {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+.qc-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 0 35px rgba(0,153,255,0.8);
+}
+.halo-text {
+    font-size: 48px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.4),   
+        0 0 10px rgba(0, 255, 255, 0.3),    
+        0 0 15px rgba(0, 255, 255, 0.2);    
+}
+.result-item{
+padding:10px;
+margin:6px 0;
+background:rgba(255,255,255,0.15);
+border-radius:8px;
+cursor:pointer;
+transition:0.25s;
+display:block;
+}
+
+#searchResults{
+scroll-behavior:smooth;
+}
+#searchResults::-webkit-scrollbar{
+width:6px;
+}
+
+#searchResults::-webkit-scrollbar-thumb{
+background:#4facfe;
+border-radius:10px;
+}
+
+#searchResults::-webkit-scrollbar-track{
+background:rgba(255,255,255,0.1);
+}
+
+.result-item:hover{
+background:rgba(255,255,255,0.35);
+transform:translateX(4px);
+}
+
+.quality-policy {
+    width: 98%;             
+    max-width: none;        
+    margin: 15px auto;
+    padding: 16px 25px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+
+    color: white;
+    border-left: 4px solid #4facfe;
+
+    text-align: justify;     
+    font-size: 15px;
+    line-height: 1.6;
+
+    white-space: normal;     
+}
+
+.quality-policy p {
+    margin: 4px 0;
+}
+
+.qp-title {
+    margin-bottom: 6px;
+}   
+.quality-policy h3 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+
+.highlight-card {
+    animation: highlightFlash 2s ease;
+    border: 3px solid #FFD700;
+    box-shadow: 0 0 25px #FFD700;
+    transform: scale(1.08);
+}
+
+@keyframes highlightFlash {
+    0% {
+        background: #FFD700;
+        color: #003366;
+        box-shadow: 0 0 40px #FFD700;
+    }
+
+    50% {
+        background: #fff59d;
+        color: #003366;
+        box-shadow: 0 0 35px #FFD700;
+    }
+
+    100% {
+        background: rgba(0, 51, 102, 0.75);
+        color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    }
+}
+
+    </style>
+    
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_ApprovalStatus msdt:dt="string">0</mso:_ApprovalStatus>
+<mso:_ApprovalAssignedTo msdt:dt="string"></mso:_ApprovalAssignedTo>
+<mso:_ApprovalRespondedBy msdt:dt="string"></mso:_ApprovalRespondedBy>
+<mso:_ApprovalSentBy msdt:dt="string"></mso:_ApprovalSentBy>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+<div id="passwordOverlay">
+        <h2>Enter Password to Access Page</h2>
+        <div>
+            <input type="password" id="pagePassword" placeholder="Password">
+            <button onclick="checkPassword()">Submit</button>
+        </div>
+    </div>
+
+
+<button class="feedback-pill"
+onclick="window.open('https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=epojVBUZf0iTxrS53aWoAr736j5BhsRDmVdReq036MdUME1WSlY2UEdCWFZIOE8wOFIxSTg3UFU5Ri4u','_blank')"
+title="Share your feedback">
+
+<span class="feedback-text">Feedback</span>
+
+</button>
+
+<div id="firstPage" class="landing">
+
+    <div class="landing-overlay"></div>
+
+    <div class="landing-content">
+        <h1 class="halo-text">Quality Control</h1>
+        <p class="landing-subtitle">
+            Centralized access for Quality Control
+        </p>
+<div class="quality-policy">
+
+    <h3>QUALITY POLICY</h3>
+
+    <p>
+        We, at Asteria Aerospace, undertake Design, Development, Production, Sales and Support of products, solutions & services for aerial intelligence conforming to International Quality Standards, and also, endeavor to continuously improve our processes, products, and solutions by identifying risk & opportunity at every stage of work through team work, thereby, improving customer satisfaction.
+    </p>
+
+</div>
+<div style="margin:25px 0;text-align:center;">
+
+<input
+type="text"
+id="globalSearch"
+placeholder="Yen Beku??"
+style="
+width:360px;
+padding:12px;
+border-radius:8px;
+border:none;
+font-size:16px;
+">
+
+</div>
+
+<div id="searchResults"
+style="
+max-width:650px;
+margin:15px auto;
+color:white;
+font-size:17px;
+text-align:left;
+
+max-height:300px;       
+overflow-y:auto;        
+padding-right:5px;      
+">
+</div>
+
+
+        <div class="qc-grid">
+            <div class="qc-card" onclick="openPage('IPQC')">
+                <h2>IPQC</h2>
+                <p>In-Process Quality Control</p>
+            </div>
+
+            <div class="qc-card" onclick="openPage('IQC')">
+                <h2>IQC</h2>
+                <p>Incoming Quality Control</p>
+            </div>
+
+            <div class="qc-card" onclick="openPage('FTQC')">
+                <h2>FTQC</h2>
+                <p>Flight Team Quality Control</p>
+            </div>
+
+            <div class="qc-card" onclick="openPage('GENERAL')">
+                <h2>GENERAL</h2>
+                <p>General Quality Resources</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="secondPage" style="display:none;">
+
+
+
+    <button 
+    onclick="goBackHome()"
+    style="
+        position:fixed;
+        top:20px;
+        left:20px;
+        padding:10px 16px;
+        border:none;
+        border-radius:8px;
+        background:#003366;
+        color:white;
+        cursor:pointer;
+        font-weight:bold;
+        z-index:1000;
+    ">
+    ← Back
+</button>
+
+
+    <div class="header">
+        <h1 onclick="showInfoBox()" style="cursor:pointer;">In Process Quality Control</h1>
+    </div>
+<!-- INFO POPUP BOX -->
+<div id="infoPopup" 
+     style="
+        display:none; 
+        position:fixed; 
+        top:0; left:0; width:100%; height:100%; 
+        background:rgba(0,0,0,0.6);
+        z-index:9999;
+        justify-content:center; 
+        align-items:center;">
+    <div style="
+        background:white; 
+        padding:25px; 
+        width:55%; 
+        max-width:600px; 
+        border-radius:15px; 
+        box-shadow:0 0 15px rgba(0,0,0,0.3);
+        font-size:18px;
+        line-height:1.5;
+        color:#003366;
+
+        max-height: 70vh;     
+        overflow-y: auto;     
+    ">
+<h2 style="margin-top:0;">About IPQC</h2>
+        
+        <p>
+             In-Process Quality Control (IPQC) ensures that product quality is maintained during the manufacturing process. It involves inspecting and testing Semi-Finished Goods (SFG), performing system static testing and PDI as per the PPC schedule, and monitoring CTQ parameters for new builds or design changes. IPQC is responsible for maintaining inspection records, raising NCRs, performing ERP transactions and CoC & UIN generation, and ensuring calibration of measuring instruments. It also supports audits, drives continuous improvement and team upskilling, participates in DRS, kick-off meetings, ECR, and PFMEA reviews, and ensures adherence to 5S and SQDC standards in inspection areas.
+        </p>
+<h2 style="margin-top:0;">Roles and Responsibilities of IPQC</h2>
+        <p>
+    
+        <ul>
+            
+            <li>Conduct SFG (Semi-Finished Goods) testing and inspection as per defined quality standards and procedures.</li>
+<li>Ensure dry run trials and documentation updates for any new builds or design modifications, including identification and monitoring of CTQ (Critical to Quality) characteristics.</li>
+<li>Execute Static Tests and Pre-Delivery Inspections (PDI) as per the Production Planning and Control (PPC) schedule and ensuring timely status update to all stakeholders/departments.</li>
+<li>Identify skill gaps within the team and drive upskilling or competency development initiatives through training or resource support.</li>
+<li>Propose and implement continuous improvement initiatives to enhance testing efficiency, accuracy, and product quality.</li>
+<li>Ensure proper documentation, control, and traceability of all work order, inspection reports, test data, and system files.</li>
+<li>Raise NCRs (Non-Conformance Reports) & on time closure of NC actions.</li>
+<li>Actively participate in key organizational processes such, DRS (Delivery Requirement Sheet), Kick-off meetings, and other project reviews.</li>
+<li>Actively participate in key organizational processes such as ECR (Engineering Change Request) and PFMEA review (Process failure mode effect analysis)</li>
+<li>Perform ERP transactions for SFG movements, generate CoC (Certificate of Conformance), and ensure data accuracy within the system.</li>
+<li>Support internal and external audits by providing evidence, records, and process demonstrations.</li>
+<li>Ensure calibration and availability of measuring instruments used during inspection and testing activities.</li>
+<li>Monitor and ensure adherence to 5S, SQDC standards in the inspection and testing areas.
+</li>
+
+        </ul>
+    </p>
+        <button onclick="closeInfoBox()" 
+            style="
+                margin-top:15px;
+                padding:10px 15px; 
+                border:none; 
+                border-radius:8px;
+                background:#003366; 
+                color:white; 
+                cursor:pointer;
+            ">
+            Close
+        </button>
+    </div>
+</div>
+
+
+ <div class="marquee-container">
+    
+        <span>⚠ Please fill in the Jig Register before handing over any jigs or instruments to anyone. ⚠ Verify all jigs and instruments while receiving. ⚠ Cut off time for receiving materials from production is 1700hrs.</span>
+           
+</div>
+
+<div style="display:flex; justify-content:space-between; align-items:center; width:90%; margin:15px auto;">
+
+
+    <div class="search-wrapper">
+    <input
+        type="text"
+        class="searchBox"
+        placeholder="What are you searching for??"
+    >
+    <span class="clear-btn">×</span>
+</div>
+
+    
+        <button onclick="expandAll()" 
+            style="padding:10px 18px; margin-right:10px; border:none; border-radius:8px;
+            background:#0059b3; color:white; cursor:pointer; font-weight:bold;">
+            Expand All
+        </button>
+
+        <button onclick="collapseAll()" 
+            style="padding:10px 18px; margin-right:10px; border:none; border-radius:8px;
+            background:#c00808; color:white; cursor:pointer; font-weight:bold;">
+            Collapse All
+        </button>
+    </div>
+
+    <button class="collapsible">AT15 CMS Data<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="file://///10.10.10.10/asteria-data/CMS/BTP information/Test Procedures & Reports/System Level Testing/System Static test/AT-15" class="card" target="_blank">System Static Test</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/Test Procedures & Reports/System Level Testing/System Static test/AT-15/Test Procedure" class="card" target="_blank">Laptop IP Configuration</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/Test Procedures & Reports/System Level Testing/System Static test/AT-15/Test Procedure" class="card" target="_blank">Windows Joystick Calibration</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/Test Procedures & Reports/System Level Testing/PDI/AT-15" class="card" target="_blank">PDI</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/AT-15/Electrical (EXXXX)" class="card" target="_blank">Electrical</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/AT-15/Mechanical (MXXX)/AASM" class="card" target="_blank">Mechanical (AASM)</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/AT-15/Mechanical (MXXX)/MASM" class="card" target="_blank">Mechanical (MASM)</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/AT-15/MCS-Sys Parameters" class="card" target="_blank">MCS-Sys Parameters</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/AT-15/TELEC" class="card" target="_blank">TELEC</a>
+
+       </div> 
+    </div>
+
+
+    <button class="collapsible">A200-XT CMS Data<span>+</span></button>
+    <div class="content">
+       <div class="dashboard">
+           <a href="file://///10.10.10.10/asteria-data/CMS/BTP information/Test Procedures & Reports/System Level Testing/System Static test/A200-XTR" target="_blank" class="card">XTR Static Test</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/Test Procedures & Reports/System Level Testing/PDI/A200-XTR" target="_blank" class="card">XTR PDI</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/A200-XT/Electrical (EXXX)" target="_blank" class="card">Electrical</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/A200-XT/Mechanical (MXXX)/AASM" target="_blank" class="card">Mechanical (AASM)</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/A200-XT/Mechanical (MXXX)/MASM" target="_blank" class="card">Mechanical (MASM)</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/A200-XT/Payload" target="_blank" class="card">Payload Files</a>
+
+<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/A200-XT/Telec (TXXXXX)" target="_blank" class="card">TELEC</a>
+
+              </div> 
+    </div>
+
+
+    <button class="collapsible">SFG & Component Level Test Procedures & Test Reports<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="file://///10.10.10.10/asteria-data/CMS/BTP information/Test Procedures & Reports/Sub assembly Level Test Procedure" target="_blank" class="card">SFG Level Test Procedures & Test Reports</a>
+
+	<a href="file://///10.10.10.10/asteria-data/CMS/BTP information/Test Procedures & Reports/Component Level Test Procedures-IQC" target="_blank" class="card">Component Level Test Procedures & Test Reports</a>
+	<a href="\\\\\10.10.10.17\Quality Control\Projects_Data\3. A200-XT\3. Power module voltage divider values\New test report" target="_blank" class="card">Power Module Test Reports</a>
+	<a href="\\\\\10.10.10.10\asteria-data\QUALITY\Quality Control\Records of QC\IPQC Component test report\AT-15\AT-15 SFG Assembly Test Reports" target="_blank" class="card">AT15 SFG Testing Reports</a>
+        <a href="\\\\\10.10.10.10\asteria-data\QUALITY\Quality Control\Records of QC\IPQC Component test report" target="_blank" class="card">IPQC Component Level Tests</a>
+        </div>
+    </div>
+
+    <button class="collapsible">IPQC Master Data<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/EWVh6xQvmLlCnokhkWHRmbABLBPiw4dvqiXZfL1-wVK5gA?e=VAMCB5&nav=MTVfe0IyMjNBQjk1LUVDRjgtNDYwMS04NTI2LUFBRkJFOUIwQjE4Mn0" target="_blank" class="card">Monthly Activity Tracker</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/EWVh6xQvmLlCnokhkWHRmbABLBPiw4dvqiXZfL1-wVK5gA?e=tV0MXT&nav=MTVfe0QzRkE3MjBDLTIzMzQtNEEzQi05QUI0LTAyNzg5N0UwMjc0Qn0" target="_blank" class="card">Issue Tracker</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/EWVh6xQvmLlCnokhkWHRmbABLBPiw4dvqiXZfL1-wVK5gA?e=D0SICY&nav=MTVfezYwNTk2QkEwLTI1OUUtNEI1My05OTY5LUQ2OTQ5NUM4MUUyNX0" target="_blank" class="card">System Testing Tracker</a>
+            <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F11%5FQuality%20control%20Documents%2F2%5FIPQC%20General%2FIPQC%20Trackers%2FInprocess%20testing%20tracker&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">Daily Testing Tracker</a>
+	    <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/EWVh6xQvmLlCnokhkWHRmbABLBPiw4dvqiXZfL1-wVK5gA?e=mQJ83r&nav=MTVfezJFODlGM0U3LTdFMTUtNDBEMi05RjQ3LTBBMTJGQ0QwQkU2NH0" target="_blank" class="card">Procedure Status</a>
+            
+	     <a href="https://asteriaaerospace.sharepoint.com/:x:/r/sites/QualityEngineering/_layouts/15/Doc.aspx?sourcedoc=%7B602A8BAE-7B7B-493F-BDE2-6EB0CF7CBBB7%7D&file=System%20details%20content%20with%20UIN.xlsx&action=default&mobileredirect=true" target="_blank" class="card">System ID with UIN Details</a>
+	     
+        </div>
+    </div>
+
+    <button class="collapsible">SharePoint<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F08%5FProcedures%20and%20reports%2FDocuments%20under%20draft%20and%20review&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&web=1&e=o3E0l8&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">    Documents under Draft & Review</a>
+            <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F11%5FQuality%20control%20Documents%2F2%5FIPQC%20General%2FIPQC%20Trackers%2FIssue%20tracker%20evidence&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&web=1&e=o3E0l8&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">Issue Tracker Evidence</a>
+            
+            <a href="https://asteriaaerospace.sharepoint.com/sites/NonConformance/Shared%20Documents/Forms/AllItems.aspx?viewid=7494d0fb%2D3b7a%2D458f%2Da765%2D6833f2b393e2&ga=1" target="_blank" class="card">NCR Evidence Link</a>
+	     <a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgCoMhPoD6XnRKQ8ZnljRP2TAUUkbWEPAUsTeAkAYla1i2w?e=IPr6jS" target="_blank" class="card">Test Jig Data</a>
+        </div>
+    </div>
+    <button class="collapsible">AT15 Data<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/r/sites/QualityEngineering/_layouts/15/Doc.aspx?sourcedoc=%7B35548BB9-5F99-41B7-B1F7-1A684F336A34%7D&file=AT15%20sprint%20actions%20plan.xlsx&action=default&mobileredirect=true" target="_blank" class="card">Sprint Actions Plan</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/Operations/Eall5kD-DH9AsPfLbunP-OMBKOERLXetLIAuOPGvC7G68w?e=Ismhfu" target="_blank" class="card">PPC Master Data Sheet(AT15-A099 to A113)</a>
+           <a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgAjwyf-kukWRJQAXt55OIYlATZeLDn-ec6glmyvhXldbHI?e=tgLGdi" target="_blank" class="card">Master Data Sheet</a>
+         <a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgA5j__USi1VTqjZhJZTwdnLAWJSP2Ekd7wLkZbkmq0wTX8?e=4xoVSV" target="_blank" class="card">Tracker</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/IQA4PRvPBzsvSJ6uyprViaLdASGD0zLJqr5wzwZ4EzOpkHs?e=dQVXKa&nav=MTVfe0JGNTBFMTcyLUIzRjgtNERBNy1CNjkwLUMwRjAyOTQ5QkIyNH0" target="_blank" class="card">AT15 System Data Info</a>
+        </div>
+    </div>
+
+    <button class="collapsible">A200-XT Data<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/Operations/EW9Y1C2fCORJlDbjCqNwaOcBOuWggfVmunf66ZCY11vWNA?e=m3XvM3" target="_blank" class="card">PPC Master Data Sheet</a>
+            
+<a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgBUE96n77tNR4JoHOLEnCyRARQot1EAo-_qijjkSkPU7E0?e=Uuhd38" target="_blank" class="card">Master Data Sheet</a>
+<a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgDytiAZtqGtTpVz_0LZFdKgAf094gT1j_Yp-skHvaQBIHk?e=tXMCHf" target="_blank" class="card">Trackers</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/IQA1dZC64LDEQrJe61sfGs5BASDPKqd7AHuYxyzp3GNZiHY?e=vN8RHm&nav=MTVfezZBMUZCMEZELTcxMzEtNDBDMi1BRkRBLTdBQTJCNTQ3MDg5N30" target="_blank" class="card">A200-XT System Data Info</a>
+        </div>
+    </div>
+
+    <button class="collapsible">Checklists <span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F11%5FQuality%20control%20Documents%2F4%5FQC%20General%2FProcess%20improvement%20draft%2F1%5FESD%20Checklist&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">ESD Checklist</a>
+            <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F11%5FQuality%20control%20Documents%2F4%5FQC%20General%2FProcess%20improvement%20draft%2F5S%20Checklist&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">5S Checklists</a>
+        </div>
+    </div>
+   
+    <button class="collapsible">ERP <span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://erp.asteria.co.in/app/coc" target="_blank" class="card">COC</a>
+            <a href="https://erp.asteria.co.in/app/nc-actions" target="_blank" class="card">NC Action</a>
+            <a href="https://erp.asteria.co.in/app/stock-reconciliation" target="_blank" class="card">Stock Reconciliation</a>
+            <a href="https://erp.asteria.co.in/app/non-conformance" target="_blank" class="card">NCR</a>
+            <a href="https://erp.asteria.co.in/app/material-request" target="_blank" class="card">Material Request</a>
+            <a href="https://erp.asteria.co.in/app/work-order/view/list" target="_blank" class="card">Work Order</a>
+	    <a href="https://erp.asteria.co.in/app/delivery-requirement-sheet" target="_blank" class="card">DRS</a>
+	     <a href="https://erp.asteria.co.in/app/engineering-change-request/view/report/ECR" target="_blank" class="card">ECR</a>
+	     <a href="https://erp.asteria.co.in/app/expense-claim" target="_blank" class="card">Expense Claim</a>
+        </div>
+    </div>
+
+    <button class="collapsible">SOPs <span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/05-SOP%20for%20Soldering%20process%20Rev-06.pdf" target="_blank" class="card">Soldering process</a>
+            <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/06-SOP%20for%20Part%20Identification%20Rev-04.pdf" target="_blank" class="card">Part Identification</a>
+            <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/07-SOP%20for%20Conformal%20Coating%20of%20Electrical%20Parts%20Rev-05.pdf" target="_blank" class="card">Conformal Coating of Electrical Parts</a>
+            <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/10-SOP%20for%20Insulation%20Coating%20of%20Electrical%20Rev-02.pdf" target="_blank" class="card">Insulation Coating of Electrical</a>
+            <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/11-SOP%20for%20Stripping%20and%20crimping%20process%20Rev-04.pdf" target="_blank" class="card">Stripping and crimping process</a>
+            <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/13-SOP%20for%20Calibration%20Rev-01.pdf" target="_blank" class="card">Calibration</a>
+	    <a href="file://10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/15-SOP%20for%20Handling%20of%20electronics%20parts%20Rev-02.pdf" target="_blank" class="card">Handling of Electronics parts</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/16-SOP%20for%20Handling%20of%20Mechanical%20Parts%20Rev-02.pdf" target="_blank" class="card">Handling of Mechanical Parts</a>
+            <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/18-SOP%20for%20Battery%20storage%20Rev-01.pdf" target="_blank" class="card">Battery storage</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/21-SOP-Packing%20work%20instructions%20Rev-00.pdf" target="_blank" class="card">Packing work instructions</a>
+ 	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/23-SOP%20for%20Issue%20control%20of%20Document%20Rev-02.pdf" target="_blank" class="card">Issue control of Document</a>
+	    <a href="file://10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/24-Battery%20Charging%20Flow%20Rev-00.pdf" target="_blank" class="card">Battery Charging Flow Rev</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/25%20-%20SOP%20FOR%20MOLEX%20CONNECTOR%20CRIMPING%20Rev-00.pdf" target="_blank" class="card">MOLEX Connector Crimping</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/26-SOP%20for%20Label%20printing%20Rev-02.pdf" target="_blank" class="card">Label Printing</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/28-SOP%20for%20Battery%20charging%20procedure%20Rev-01.pdf" target="_blank" class="card">Battery charging procedure</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/31-SOP%20for%20SQDC%20Rev-00.pdf" target="_blank" class="card">SQDC</a>
+	     <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/34-SOP%20for%20Battery%20Disposal%20Rev-02.pdf" target="_blank" class="card">Battery Disposal</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/35-SOP%20for%20Battery%20Monitoring%20Procedure%20Rev-03.pdf" target="_blank" class="card">Battery Monitoring Procedure</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/36-SOP%20for%20the%20Battery%20handling%20Rev-00.pdf" target="_blank" class="card">Battery handling</a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/37-SOP%20UIN%20FIX%20&%20BATTERY%20LABELS%20PRINTING%20-%20Rev-02.pdf" target="_blank" class="card">UIN FIX & Battery Labels Printing </a>
+	    <a href="file://///10.10.10.10/asteria-data/CMS/SOPs%20(Mfg)/38-SOP%20for%20ERP%20transactions%20Rev-05.pdf" target="_blank" class="card"> ERP transactions</a>
+        </div>
+    </div>
+
+   
+    <button class="collapsible">Softwares <span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F12%5FSoftwares%2FIPQC&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">Testing Software</a>
+<a href="\\\\\10.10.10.17\Quality Control\Projects_Data\3. A200-XT\3. Power module voltage divider values\PowerModuleViewer" target="_blank" class="card">Power Module Viewer</a>
+
+        </div>
+    </div>
+
+
+    <button onclick="topFunction()" class="topBtn">↑</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="iqcPage" style="display:none;">
+    <div class="header">
+        <h1 onclick="showIQCInfo()" style="cursor:pointer;">
+Incoming Quality Control
+</h1>
+    </div>
+
+<div id="iqcInfoPopup"
+style="
+display:none;
+position:fixed;
+top:0; left:0; width:100%; height:100%;
+background:rgba(0,0,0,0.6);
+z-index:9999;
+justify-content:center;
+align-items:center;">
+
+<div style="
+background:white;
+padding:25px;
+width:55%;
+max-width:600px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+font-size:18px;
+line-height:1.5;
+color:#003366;
+max-height:70vh;
+overflow-y:auto;">
+
+<h2>About IQC</h2>
+
+<p>
+Incoming Quality Control (IQC) ensures that all materials and parts received from suppliers or internal sources meet the required quality standards before being used in production. It involves inspecting incoming parts, recording test results, raising nonconformance reports for rejected items, and coordinating with departments like SCM, Stores, PPC, and MRB for timely inspection and resolution. IQC also develops inspection procedures and CTQ parameters, maintains calibrated measuring instruments, updates inspection status in ERP, supports new build trials and design changes, participates in project reviews, and ensures audit findings are addressed.
+</p>
+
+<h2>Roles & Responsibilities of IQC</h2>
+
+<ul>
+<li>Incoming inspection of inwards parts which are received from Supplier, MRB, CS & Production.</li>
+<li>Regular communications with SCM, Stores, PPC, MRB & CS for the timely completion of received parts inspection.</li>
+<li>Ensure dry run trials are conducted for all new builds and design modifications.</li>
+<li>Record the inspection results in test reports.</li>
+<li>Raising nonconformance reports for the rejected parts & communicate the same to SQA, SCM & PPC.</li>
+<li>Reject or quarantine non-conforming materials.</li>
+<li>Authority to Pass/Fail/Hold the received material with valid reasons.</li>
+<li>Developing inspection and test procedures along with associated CTQ (Critical to Quality) characteristics.</li>
+<li>Perform ERP transactions related to material movements and inspection status updates.</li>
+<li>Ensure calibration, validity, and availability of measuring instruments used for inspection and testing.</li>
+<li>Drive upskilling and competency development through training, mentoring, or resource support.</li>
+<li>Actively participate in key organizational and project-related processes, including:
+* DRS (Delivery Requirement Sheet)
+* Project kick-off meetings
+* Design and production reviews
+* ECR (Engineering Change Request)</li>
+<li>Ensure audit findings related to IQC are addressed and closed within defined timelines</li>
+
+
+</ul>
+
+<button onclick="closeIQCInfo()"
+style="
+margin-top:15px;
+padding:10px 15px;
+border:none;
+border-radius:8px;
+background:#003366;
+color:white;
+cursor:pointer;">
+Close
+</button>
+
+</div>
+</div>
+
+
+
+
+<div style="display:flex; justify-content:space-between; align-items:center; width:90%; margin:15px auto;">
+
+   <div class="search-wrapper">
+    <input
+        type="text"
+        class="searchBox"
+        placeholder="What are you searching for??"
+    >
+    <span class="clear-btn">×</span>
+</div>
+
+        <button onclick="expandAll()" 
+            style="padding:10px 18px; margin-right:10px; border:none; border-radius:8px;
+            background:#0059b3; color:white; cursor:pointer; font-weight:bold;">
+            Expand All
+        </button>
+
+        <button onclick="collapseAll()" 
+            style="padding:10px 18px; margin-right:10px; border:none; border-radius:8px;
+            background:#c00808; color:white; cursor:pointer; font-weight:bold;">
+            Collapse All
+        </button>
+    </div>
+
+<button class="collapsible">AT15 CMS Data<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\AT-15\Electrical (EXXXX)" class="card" target="_blank">Electrical</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\AT-15\Mechanical (MXXX)" class="card" target="_blank">Mechanical</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\AT-15\Condition of Supply" class="card" target="_blank">Condition of supply</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\AT-15\TELEC" class="card" target="_blank">TELEC</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\AT-15\MCS-Sys Parameters" class="card" target="_blank">MCS-Sys Parameters</a>
+	    
+       </div> 
+    </div>
+
+<button class="collapsible">A200-XT CMS Data<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\Electrical (EXXX)" class="card" target="_blank">Electrical</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\Mechanical (MXXX)" class="card" target="_blank">Mechanical</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\Telec (TXXXXX)" class="card" target="_blank">TELEC</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\MCS-Sys Parameters" class="card" target="_blank">MCS-Sys Parameters</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\Autopilot" class="card" target="_blank">Autopilot</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\Payload" class="card" target="_blank">Payload</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\Radio" class="card" target="_blank">Radio</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\ESC" class="card" target="_blank">ESC</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\A200-XT\GCS" class="card" target="_blank">GCS</a>
+       </div> 
+    </div>
+
+
+
+<button class="collapsible">SharePoint<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F08%5FProcedures%20and%20reports%2FDocuments%20under%20draft%20and%20review%2FIQC&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&web=1&e=o3E0l8&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" class="card" target="_blank">Documents under Draft & Review</a>
+	     <a href="https://asteriaaerospace.sharepoint.com/sites/NonConformance/Shared%20Documents/Forms/AllItems.aspx?viewid=7494d0fb%2D3b7a%2D458f%2Da765%2D6833f2b393e2&ga=1" target="_blank" class="card">NCR Evidence Link</a>
+	   
+	    
+       </div> 
+    </div>
+
+
+<button class="collapsible">Softwares<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+		<a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F12%5FSoftwares%2FIQC&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&web=1&e=o3E0l8&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" class="card" target="_blank">Testing Softwares</a>
+       </div> 
+    </div>
+
+<button class="collapsible">ERP<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+	        <a href="https://erp.asteria.co.in/app/purchase-receipt?company=%5B%22like%22%2C%22%25ASTERIA+AEROSPACE++LIMITED%25%22%5D&status=To+Bill" target="_blank" class="card">Purchase Receipt</a>
+		<a href="https://erp.asteria.co.in/app/stock-reconciliation" target="_blank" class="card">Stock Reconciliation</a>
+		<a href="https://erp.asteria.co.in/app/material-request" target="_blank" class="card">Material Request</a>
+		<a href="https://erp.asteria.co.in/app/non-conformance" target="_blank" class="card">NCR</a>
+		<a href="https://erp.asteria.co.in/app/nc-actions" target="_blank" class="card">NC Action</a>
+		<a href="https://erp.asteria.co.in/app/mrb-action" target="_blank" class="card">MRB Action</a>
+		<a href="https://erp.asteria.co.in/app/engineering-change-request/view/report/ECR" target="_blank" class="card">ECR</a>
+		<a href="https://erp.asteria.co.in/app/purchase-order/view/list" target="_blank" class="card">Purchase Order</a>
+		<a href="https://erp.asteria.co.in/app/item" target="_blank" class="card">Item</a>
+		<a href="https://erp.asteria.co.in/app/serial-no" target="_blank" class="card">Serial Number</a>
+		<a href="https://erp.asteria.co.in/app/batch" target="_blank" class="card">Batch Number</a>
+ <a href="https://erp.asteria.co.in/app/expense-claim" target="_blank" class="card">Expense Claim</a>
+ 	</div> 
+    </div>
+
+<button class="collapsible">Test Procedures and Reports<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+	        <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\Component Level Test Procedures-IQC\COTS Electronics" target="_blank" class="card">COTS Electronics</a>
+		<a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\Component Level Test Procedures-IQC\COTS-Standards" target="_blank" class="card">COTS-Standards</a>
+		<a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\Component Level Test Procedures-IQC\Electrical Assembly" target="_blank" class="card">Electrical Assembly</a>
+		<a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\Component Level Test Procedures-IQC\Mechanical Assembly" target="_blank" class="card">Mechanical Assembly</a>
+		<a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\Component Level Test Procedures-IQC\PCB Assembly" target="_blank" class="card">PCB Assembly</a>
+		<a href="\\\\\10.10.10.10\asteria-data\QUALITY\Quality Control\IQC test reports\A200-XT mechanical parts" target="_blank" class="card">A200-XT Mechanical Parts Reports</a>
+		<a href="\\10.10.10.10\asteria-data\QUALITY\Quality Control\IQC test reports\AT-15 Mechanical parts" target="_blank" class="card">AT-15 Mechanical parts Reports</a>
+		<a href="\\10.10.10.10\asteria-data\QUALITY\Quality Control\IQC test reports\Fastener inspection report" target="_blank" class="card">Fastener Inspection Report</a>
+		<a href="\\\\\10.10.10.10\asteria-data\QUALITY\Quality Control\IQC test reports\Manuals" target="_blank" class="card">Report for Manuals</a>
+		<a href="https://asteriaaerospace.sharepoint.com/sites/QualityManagementSystem/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityManagementSystem%2FShared%20Documents%2FIncoming%20Quality%20Control%20%28%20IQC%20%29%2F3%5FFormats%2FAA%5FQC%5FFMT%2D018%20COTS%20Parts%20IQC%20Inspection%20Report%2Epdf&parent=%2Fsites%2FQualityManagementSystem%2FShared%20Documents%2FIncoming%20Quality%20Control%20%28%20IQC%20%29%2F3%5FFormats" target="_blank" class="card">COTS Parts Inspection Report</a>
+
+
+ 	</div> 
+    </div>
+
+
+<button class="collapsible">IQC Master Data<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+	        <a href="\\\\\10.10.10.10\asteria-data\QUALITY\Quality Control\Records of QC" target="_blank" class="card">Records of QC</a>
+		<a href="\\\\\10.10.10.10\asteria-data\CMS\SOPs (Mfg)" target="_blank" class="card">SOPs</a>
+		<a href="https://asteriaaerospace.sharepoint.com/:x:/r/sites/QualityManagementSystem/_layouts/15/Doc.aspx?sourcedoc=%7BACF9D0DA-75A1-4F73-8A73-E0AD976D8D5E%7D&file=AA_QC_FMT_204%20IQC%20Suspect%20part%20list.xlsx&action=default&mobileredirect=true" target="_blank" class="card">Suspect Part List</a>
+		<a href="https://forms.office.com/Pages/DesignPageV2.aspx?origin=NeoPortalPage&subpage=design&id=epojVBUZf0iTxrS53aWoAsVbB_SucwVHtHGjWoWzrqVUMFRZVkxENDM3QUQ5UzJCMjZVMzBXVFo5Ri4u&analysis=false" target="_blank" class="card">IQC JIGS, Harness & Instrument Request Form</a>
+	<a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgBIrc9QjIxORpSQoG6rub3zAUKZbEjyW382ssHCdA90BgU?e=dR8c2N" target="_blank" class="card">Daily PR</a>
+
+ 	</div> 
+    </div>
+
+
+
+<button onclick="topFunction()" class="topBtn">↑</button>
+
+    <button 
+    onclick="goBackHome()"
+    style="
+        position:fixed;
+        top:20px;
+        left:20px;
+        padding:10px 16px;
+        border:none;
+        border-radius:8px;
+        background:#003366;
+        color:white;
+        cursor:pointer;
+        font-weight:bold;
+        z-index:1000;
+    ">
+    ← Back
+</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="ftqcPage" style="display:none;">
+    <div class="header">
+        <h1 onclick="showFTQCInfo()" style="cursor:pointer;">
+Flight Team Quality Control
+</h1>
+    </div>
+
+
+<div id="ftqcInfoPopup"
+style="
+display:none;
+position:fixed;
+top:0; left:0; width:100%; height:100%;
+background:rgba(0,0,0,0.6);
+z-index:9999;
+justify-content:center;
+align-items:center;">
+
+<div style="
+background:white;
+padding:25px;
+width:55%;
+max-width:600px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+font-size:18px;
+line-height:1.5;
+color:#003366;
+max-height:70vh;
+overflow-y:auto;">
+
+<h2>About FTQC</h2>
+
+<p>
+Flight Team Quality Control(FTQC) ensures that the finished product meets all required quality and performance standards before delivery to the customer. It involves conducting flight tests as per the PPC schedule, maintaining accurate test records, and reporting results to stakeholders. FTQC is responsible for supporting dry runs for new builds or modifications, monitoring CTQ parameters, raising NCRs, and improving testing effectiveness. FTQC also participates in DRS, project kick-off meetings, and ECR discussions, ensures team competency and business continuity, and maintains 5S, safety, and quality standards in testing areas.
+
+</p>
+
+<h2>Roles and Responsibilities of FTQC</h2>
+
+<ul>
+<li>Execute Flight test as per the Production Planning and Control (PPC) schedule.</li>
+<li>Maintain complete and accurate records, and on-time reporting to all stakeholders.</li>
+<li>Assess skill gaps within team and implement initiatives to close them through upskilling or hiring.</li>
+<li>Ensure availability of second line for business continuity for all key activities.</li>
+<li>Ensure dry run and document updates for any new build or new modification along with associated CTQ (Critical to Quality) characteristics.</li>
+<li>Suggest and implement initiatives to improve the quality and effectiveness of testing.</li>
+<li>Raise NCRs (Non-Conformance Reports) whenever applicable and on-time closure of NC actions.</li>
+<li>Actively participate in customer order discussions such as DRS (Delivery Requirement Sheet), Kick-off meetings, and other project reviews.</li>
+<li>Monitor and ensure adherence to 5S, safety, and housekeeping standards in the inspection and testing areas.</li>
+<li>Support Engineering such as ECR (Engineering Change Request)</li>
+
+</ul>
+
+<button onclick="closeFTQCInfo()"
+style="
+margin-top:15px;
+padding:10px 15px;
+border:none;
+border-radius:8px;
+background:#003366;
+color:white;
+cursor:pointer;">
+Close
+</button>
+
+</div>
+</div>
+
+
+
+<div style="display:flex; justify-content:space-between; align-items:center; width:90%; margin:15px auto;">
+
+
+   <div class="search-wrapper">
+    <input
+        type="text"
+        class="searchBox"
+        placeholder="What are you searching for??"
+    >
+    <span class="clear-btn">×</span>
+</div>
+
+
+    
+        <button onclick="expandAll()" 
+            style="padding:10px 18px; margin-right:10px; border:none; border-radius:8px;
+            background:#0059b3; color:white; cursor:pointer; font-weight:bold;">
+            Expand All
+        </button>
+
+        <button onclick="collapseAll()" 
+            style="padding:10px 18px; margin-right:10px; border:none; border-radius:8px;
+            background:#c00808; color:white; cursor:pointer; font-weight:bold;">
+            Collapse All
+        </button>
+    </div>
+
+
+
+
+    <button class="collapsible">CMS released Test Procedures<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\System Level Testing\Dynamic\A200-XT\Test Procedure\A200-XT" target="_blank" class="card">A200-XT Test Procedure</a>
+            <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\System Level Testing\Dynamic\A200-XT\Test Procedure\A200-XT with ROG" target="_blank" class="card">A200-XT with ROG Test Procedure</a>
+	     <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\System Level Testing\Dynamic\AT-15\Test Procedure" target="_blank" class="card">AT15 Test Procedure</a>
+	    
+        </div>
+    </div>
+
+
+    <button class="collapsible">CMS released Test Reports<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+		 <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\System Level Testing\Dynamic\A200-XT\Test Report\A200-XT" target="_blank" class="card">A200-XT Test Report</a>
+	     <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\System Level Testing\Dynamic\A200-XT\Test Report\A200-XT with ROG" target="_blank" class="card">A200-XT with ROG Test Report</a>
+	     <a href="\\\\\10.10.10.10\asteria-data\CMS\BTP information\Test Procedures & Reports\System Level Testing\Dynamic\AT-15\Test Report" target="_blank" class="card">AT15 Test Report</a>
+ </div>
+    </div>
+
+<button class="collapsible">Test Procedures & Test Reports in Draft<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+
+<a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgADYwU5QA9HTK7voaFyezkSAa8vxCUI_WlX-avp20OwsGU?e=tbTFMi"target="_blank" class="card">A200-XT Test Procedures + Payload Test Procedures</a>
+<a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgAZ39Fqnf2sQpJD5ebZiATRAZnmSIfwRkQFGle0o2SIXxI?e=tD702W" target="_blank" class="card">A200-XT Test Reports</a>
+<a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgChX2m_kjb9RL-pxvH1XyzzAZjCDwncxgFQudFLe1UnypU?e=YNlMeZ" target="_blank" class="card">A200-XT with ROG Test Reports</a>
+</div>
+    </div>
+
+<button class="collapsible">SharePoint<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+		
+		<a href="https://asteriaaerospace.sharepoint.com/sites/NonConformance/Shared%20Documents/Forms/AllItems.aspx?viewid=7494d0fb%2D3b7a%2D458f%2Da765%2D6833f2b393e2&ga=1" target="_blank" class="card">NCR Evidence Link</a>
+	    
+ </div>
+    </div>
+
+
+
+
+
+    <button class="collapsible">Trackers<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/IQBRhNojkY3sT5qNhw1u6RBaAbOA9C5SvpJmUGXOxdpSXY8?e=tOTw6v" target="_blank" class="card">Master Tracker</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/EQrPN6NfPqhLp-EQJiySa78BoeGFpftC7Wp8aZAmiYL-wA?e=82vNe1" target="_blank" class="card">Client Order Tracker</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/EQjXVTRLaKNBtx3e773dN9EBThNQ5Uq3dmE1WdCQ006bxg?e=iqGhZY" target="_blank" class="card">Delivery Challan</a>
+            <a href="https://asteriaaerospace-my.sharepoint.com/:x:/g/personal/subodh_dash_asteria_co_in/IQDGuFEtdlwORaxq79rb39guAYZnbLVS18OUBLo0k1zAnko?e=OmXbB5" target="_blank" class="card">Delivery Challan No Tracker</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/Eac1c4jwsFlCm4opmyS2h-YBP5UrHzoNgwbRpNoFxFUoHQ?e=SdCT3L" target="_blank" class="card">FT Material Request</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:w:/s/QualityEngineering/EdSxaCPU58xAmEbcP7e2MSgBojEMduVAuzuuD5Kj7ep93g?e=2f9ivM" target="_blank" class="card">Common Item Checklist</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/EUsSkD9pTd5IvLhky4c9OvsB2ElGYaCMGSmKfF4z3Vp-MQ?e=7chquj" target="_blank" class="card">FTT Common Items & Battery Monitor</a>
+            <a href="https://asteriaaerospace.sharepoint.com/:x:/s/QualityEngineering/Easo5NJmPv5KnPJVxugpGkQB_m_ZA8LG6gv60U0ucbzzLw?e=LGcR43" target="_blank" class="card">Operations & Audit Planner</a>
+	    
+        </div>
+    </div>
+
+
+
+<button class="collapsible">ERP <span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            
+            <a href="https://erp.asteria.co.in/app/nc-actions" target="_blank" class="card">NC Action</a>
+            <a href="https://erp.asteria.co.in/app/non-conformance" target="_blank" class="card">NCR</a>
+            <a href="https://erp.asteria.co.in/app/material-request" target="_blank" class="card">Material Request</a>
+            <a href="https://erp.asteria.co.in/app/work-order/view/list" target="_blank" class="card">Work Order</a>
+	    <a href="https://erp.asteria.co.in/app/delivery-requirement-sheet" target="_blank" class="card">DRS</a>
+	     <a href="https://erp.asteria.co.in/app/engineering-change-request/view/report/ECR" target="_blank" class="card">ECR</a>
+	     <a href="https://erp.asteria.co.in/app/expense-claim" target="_blank" class="card">Expense Claim</a>
+	     <a href="https://erp.asteria.co.in/app/query-report/Stock%20Ledger?company=ASTERIA+AEROSPACE++LIMITED&from_date=2026-02-16&to_date=2026-03-16&valuation_field_type=Currency" target="_blank" class="card">Stock Ledger</a>
+<a href="https://erp.asteria.co.in/app/erp-change-request" target="_blank" class="card">ERP Change Request</a>
+
+
+
+
+        </div>
+    </div>
+ 
+
+
+    <button class="collapsible">Forms<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=epojVBUZf0iTxrS53aWoAq5b4kFBpT1MiD5-DzTayD1UM0dPQU4zUjcwQUlCWEo0QzhUUDNVQlhVSS4u&origin=Invitation&channel=1" target="_blank" class="card">Daily Test Update Form</a>
+            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=epojVBUZf0iTxrS53aWoAi0hJamKFOtGsvbiemk5LcBUQTNGTk40WDBSU1lTV1VUM0hKMUVLRTUwVC4u" target="_blank" class="card">Material Request Form</a>
+	    
+        </div>
+    </div>
+
+<button onclick="topFunction()" class="topBtn">↑</button>
+     <button 
+    onclick="goBackHome()"
+    style="
+        position:fixed;
+        top:20px;
+        left:20px;
+        padding:10px 16px;
+        border:none;
+        border-radius:8px;
+        background:#003366;
+        color:white;
+        cursor:pointer;
+        font-weight:bold;
+        z-index:1000;
+    ">
+    ← Back
+</button>
+</div>
+
+
+
+
+
+
+
+
+<div id="generalPage" style="display:none;">
+    <div class="header">
+        <h1>General</h1>
+    </div>
+
+<div style="display:flex; justify-content:space-between; align-items:center; width:90%; margin:15px auto;">
+
+    <div class="search-wrapper">
+    <input
+        type="text"
+        class="searchBox"
+        placeholder="What are you searching for??"
+    >
+    <span class="clear-btn">×</span>
+</div>
+
+    
+        <button onclick="expandAll()" 
+            style="padding:10px 18px; margin-right:10px; border:none; border-radius:8px;
+            background:#0059b3; color:white; cursor:pointer; font-weight:bold;">
+            Expand All
+        </button>
+
+        <button onclick="collapseAll()" 
+            style="padding:10px 18px; margin-right:10px; border:none; border-radius:8px;
+            background:#c00808; color:white; cursor:pointer; font-weight:bold;">
+            Collapse All
+        </button>
+    </div>
+
+
+
+    <button class="collapsible">Dashboard<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="https://erp.asteria.co.in/insights/shared/dashboard/9qr294aptk" target="_blank" class="card">SQDC</a>
+            <a href="https://erp.asteria.co.in/insights/shared/dashboard/rabttsgi1h" target="_blank" class="card">FTWH</a>
+	     <a href="https://erp.asteria.co.in/insights/shared/dashboard/ej4ii5lf8r" target="_blank" class="card">IQC PR</a>
+	     <a href="https://erp.asteria.co.in/insights/shared/dashboard/icrijvknvq" target="_blank" class="card">Reconciliation Dashboard</a>
+	     <a href="https://erp.asteria.co.in/insights/dashboards/61026lt8b9" target="_blank" class="card">RCA Approval Aging</a>
+	     <a href="https://erp.asteria.co.in/insights/dashboards/iemh7n2sc4" target="_blank" class="card">NC Actions Performance</a>
+	     <a href="https://erp.asteria.co.in/insights/dashboards/1be8jh7k0f" target="_blank" class="card">NC SPOC NC Status</a>
+		<a href="https://erp.asteria.co.in/insights/dashboards/gtsqt3h5k3" target="_blank" class="card">IQC OTD Tracker</a>
+		<a href="https://erp.asteria.co.in/insights/dashboards/f5ktpcmbjm" target="_blank" class="card">NC Closure plan</a>
+		<a href="https://erp.asteria.co.in/insights/dashboards/3j3s1hv9vh" target="_blank" class="card">Overall NC Status</a>
+		<a href="https://erp.asteria.co.in/insights/dashboards/juds0ratl2" target="_blank" class="card">NCR/CAR Dashboard</a>
+		<a href="https://erp.asteria.co.in/insights/dashboards/q2u5nupbal" target="_blank" class="card">NC Actions TAT-SPOC</a>
+		<a href="https://erp.asteria.co.in/insights/workbook/48/dashboard/4sbjnhnjh6" target="_blank" class="card">NC Action Acceptance Tracker</a>
+		
+
+
+        </div>
+    </div>
+
+    <button class="collapsible">Data <span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+
+	    <a href="https://asteriaaerospace.sharepoint.com/sites/Operations/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FOperations%2FShared%20Documents%2FProduction%20Planning%20Reports%2FWeekly%20Loading%20Plan%2FLoading%20plan%2FRenamed%20Loading%20Plan&viewid=9403d372%2Dc6a7%2D4b38%2D8825%2D31dfc542b8f8&sharingv2=true&fromShare=true&at=9&CT=1783501291294&OR=OWA%2DNT%2DMail&CID=2604eb35%2De94a%2D6c3b%2Ddf7c%2D8df3b219b9b1&SI=NonSentItems&SLSync=F&FolderCTID=0x01200019A9ADCED9FFE645BDFAA5AABEFCE2A4" target="_blank" class="card">Loading Plan</a>
+	    <a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgAA2T-_ym1GR4lItMdH_uhtAb0tkJ_BnLtgMnlWsRO_NWg?e=qaBnJQ" target="_blank" class="card">Leave Planner</a>
+	     <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F13%5FBudget%20planner&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&web=1&e=o3E0l8&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">Budget Planner</a>
+ 	<a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F15%5FOPEX&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&newTargetListUrl=%2Fsites%2FQualityEngineering%2FShared%20Documents&viewpath=%2Fsites%2FQualityEngineering%2FShared%20Documents%2FForms%2FAllItems%2Easpx" target="_blank" class="card">OPEX</a>
+	    <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F20%5FTeam%20Outing&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&web=1&e=o3E0l8&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">Team Outing</a> 
+	     <a href="\\\\\10.10.10.17\Quality Control\Projects_Data" target="_blank" class="card">10.10.10.17</a>
+	 <a href="\\\\\10.10.10.10\asteria-data" target="_blank" class="card">Asteria Data</a>
+	<a href="https://forms.office.com/Pages/ResponsePage.aspx?id=epojVBUZf0iTxrS53aWoAntC1hsoSpVAgOw1WDD4vFNUMVZCSEpNTjc2SzdaMU82UFAzU0NRM0w1Qy4u" target="_blank" class="card">Document Review or Release Request Form</a>
+		<a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityEngineering%2FShared%20Documents%2F10%5FMonthly%20Retrospective&viewid=353073e1%2D59dc%2D4b3f%2Db25f%2D19a0b9ec2c6e&csf=1&CID=79431195%2Db06e%2D464a%2D86ea%2D93021fe5c832&FolderCTID=0x012000F989D7E2AAB99E43A0E855047330C78A" target="_blank" class="card">Retrospective</a>
+     
+
+ </div>
+    </div> 
+
+
+    <button class="collapsible">Onboarding <span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+            <a href="\\\\\10.10.10.10\asteria-data\QUALITY\Quality Control\Quailty - Functional Manual" target="_blank" class="card">Functional Manual</a>
+	    <a href="\\\\\10.10.10.10\asteria-data\CMS\SOPs (Mfg)" target="_blank" class="card">SOPs</a>
+	    <a href="https://asteriaaerospace.sharepoint.com/:f:/s/QualityEngineering/IgApIc8iNKikSr4h4PJSqDFAAW6a8Zu4039ab6BIadXZgWM?e=siDIrp" target="_blank" class="card">Onboarding PPTs</a>
+	    </div>
+</div>
+
+
+    <button class="collapsible">Tools<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+ 	 <a href="https://asteriaaerospace.sharepoint.com/_layouts/15/sharepoint.aspx" target="_blank" class="card">SharePoint</a>
+	 <a href="https://home.atlassian.com/o/147ba448-f673-4b43-8c9d-9a0949c3bdd0/?cloudId=7acdf9fb-763b-4dad-b206-da3d5593a1b2" target="_blank" class="card">Jira</a>
+	 <a href="https://asteriaaero.atlassian.net/wiki/home" target="_blank" class="card">Confluence</a>
+	 <a href="https://www.drawio.com/" target="_blank" class="card">Flowchart Maker</a>
+ 	 <a href="https://outlook.office.com/mail/" target="_blank" class="card">Outlook</a>
+	 <a href="https://erp.asteria.co.in/app/home" target="_blank" class="card">ERP</a>
+	 <a href="https://asteria.keka.com/#/home/dashboard" target="_blank" class="card">Keka</a>
+	<a href="https://test-erp.asteria.co.in/app/home" target="_blank" class="card">Test ERP</a>
+
+
+ </div>
+    </div> 
+	
+    <button class="collapsible">Kaizen Tracking System<span>+</span></button>
+    <div class="content">
+        <div class="dashboard">
+      <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/_layouts/15/listforms.aspx?cid=NWNhYzA5NDctYzAyOC00OWI5LWJjNzEtNTA0OWFmZTYwOGE1&nav=MDlkYjZhN2UtZjYxOS00YzcwLWJhYTQtZjU0M2M4OTZhMmQz" target="_blank" class="card">Kaizen Tracker Form</a>
+	<a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Lists/Kaizen%20Master/AllItems.aspx" target="_blank" class="card">Kaizen Master List</a>
+     <a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/_layouts/15/listforms.aspx?cid=OTMwYjhmMTctMjIyNy00MGE1LThkNGItMGQ2NDliNWIzNjEw&nav=MTEzMjg5ZTMtYWQyMi00YWFlLTk0YTUtMGVmNDQ2NjM2YzA1" target="_blank" class="card">Kaizen Subtask Form</a>
+	<a href="https://asteriaaerospace.sharepoint.com/sites/QualityEngineering/Lists/Kaizen%20Subtask/Total%20Subtask.aspx" target="_blank" class="card">Kaizen Subtask List</a>
+
+</div>
+    </div> 
+
+
+<button onclick="topFunction()" class="topBtn">↑</button>
+
+
+    <button 
+    onclick="goBackHome()"
+    style="
+        position:fixed;
+        top:20px;
+        left:20px;
+        padding:10px 16px;
+        border:none;
+        border-radius:8px;
+        background:#003366;
+        color:white;
+        cursor:pointer;
+        font-weight:bold;
+        z-index:1000;
+    ">
+    ← Back
+</button>
+</div>
+<script>
+
+        function checkPassword() {
+            const input = document.getElementById('pagePassword').value;
+            const correctPassword = "asteria@123"; // <-- set your password here
+
+            if (input === correctPassword) {
+                document.getElementById('passwordOverlay').style.display = 'none';
+            } else {
+                alert("Oops!! Incorrect password! Try again.");
+            }
+        }
+</script>
+
+<script>
+function goBackHome() {
+    document.getElementById("secondPage").style.display = "none";
+    document.getElementById("firstPage").style.display = "flex";
+}
+</script>
+
+<script>
+document.getElementById("pagePassword").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        checkPassword();  // Call the same function as the button
+    }
+});
+</script>
+
+
+<script>
+function showInfoBox() {
+    document.getElementById("infoPopup").style.display = "flex";
+}
+
+function closeInfoBox() {
+    document.getElementById("infoPopup").style.display = "none";
+}
+</script>
+
+<script>
+document.querySelectorAll(".search-wrapper").forEach(wrapper => {
+    const input = wrapper.querySelector(".searchBox");
+    const clearBtn = wrapper.querySelector(".clear-btn");
+
+    // find the correct page container
+    const page = wrapper.closest(
+        "#secondPage, #iqcPage, #ftqcPage, #generalPage"
+    );
+
+    input.addEventListener("input", () => {
+        clearBtn.style.display = input.value ? "block" : "none";
+        filterCards(input.value.toLowerCase(), page);
+    });
+
+    clearBtn.addEventListener("click", () => {
+        input.value = "";
+        clearBtn.style.display = "none";
+        filterCards("", page);
+    });
+});
+
+function filterCards(query, container) {
+    if (!container) return;
+
+    const sections = container.querySelectorAll(".collapsible");
+
+    sections.forEach(btn => {
+        const content = btn.nextElementSibling;
+        const cards = content.querySelectorAll(".card");
+
+        let matchFound = false;
+
+        cards.forEach(card => {
+            const match = card.textContent.toLowerCase().includes(query);
+            card.style.display = match ? "flex" : "none";
+            if (match) matchFound = true;
+        });
+
+        if (matchFound || query === "") {
+            btn.style.display = "flex";
+            content.style.display = query ? "block" : "none";
+            btn.querySelector("span").innerText = query ? "−" : "+";
+        } else {
+            btn.style.display = "none";
+            content.style.display = "none";
+        }
+    });
+}
+</script>
+
+
+
+<script>
+document.querySelectorAll(".search-wrapper").forEach(wrapper => {
+    const input = wrapper.querySelector(".searchBox");
+    const clearBtn = wrapper.querySelector(".clear-btn");
+
+    input.addEventListener("input", () => {
+        clearBtn.style.display = input.value ? "block" : "none";
+        searchContent(input); // pass correct input
+    });
+
+    clearBtn.addEventListener("click", () => {
+        input.value = "";
+        clearBtn.style.display = "none";
+        searchContent(input);
+    });
+});
+
+function filterCards(query, container) {
+    if (!container) return;
+
+    const sections = container.querySelectorAll(".collapsible");
+
+    sections.forEach(btn => {
+        const content = btn.nextElementSibling;
+        const cards = content.querySelectorAll(".card");
+
+        const sectionTitle = btn.textContent.toLowerCase();
+        const sectionMatch = sectionTitle.includes(query);
+
+        let cardMatchFound = false;
+
+        cards.forEach(card => {
+            const cardMatch = card.textContent.toLowerCase().includes(query);
+
+            if (sectionMatch || cardMatch || query === "") {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+
+            if (cardMatch) cardMatchFound = true;
+        });
+
+        if (sectionMatch || cardMatchFound || query === "") {
+            btn.style.display = "flex";
+            content.style.display = query ? "block" : "none";
+            btn.querySelector("span").innerText = query ? "−" : "+";
+        } else {
+            btn.style.display = "none";
+            content.style.display = "none";
+        }
+    });
+}
+</script>
+<script>
+function clearSearch() {
+    document.getElementById("searchBox").value = "";
+    document.querySelector(".clear-btn").style.display = "none";
+    searchContent(); // Reset search results
+}
+
+document.getElementById("searchBox").addEventListener("input", function () {
+    document.querySelector(".clear-btn").style.display =
+        this.value.length > 0 ? "block" : "none";
+});
+</script>
+
+<script>
+function expandAll() {
+    document.querySelectorAll(".collapsible").forEach(btn => {
+        let content = btn.nextElementSibling;
+        content.style.display = "block";
+        btn.querySelector("span").innerText = "−";
+    });
+}
+
+function collapseAll() {
+    document.querySelectorAll(".collapsible").forEach(btn => {
+        let content = btn.nextElementSibling;
+        content.style.display = "none";
+        btn.querySelector("span").innerText = "+";
+    });
+}
+
+</script>
+<script>
+
+        
+        document.querySelectorAll(".collapsible").forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+                let content = btn.nextElementSibling;
+                content.style.display = content.style.display === "block" ? "none" : "block";
+                btn.querySelector("span").innerText = content.style.display === "block" ? "−" : "+";
+            });
+        });
+
+
+const topButtons = document.querySelectorAll(".topBtn");
+
+window.addEventListener("scroll", () => {
+    topButtons.forEach(btn => {
+        btn.style.display = window.scrollY > 150 ? "block" : "none";
+    });
+});
+
+function topFunction() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+        
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
+
+<script>
+function goNext() {
+    if (document.getElementById("firstPage").style.display !== "none") {
+        document.getElementById("firstPage").style.display = "none";
+        document.getElementById("secondPage").style.display = "block";
+    } else {
+        document.getElementById("firstPage").style.display = "block";
+        document.getElementById("secondPage").style.display = "none";
+    }
+}
+</script>
+<script>
+function openQC(type) {
+    document.getElementById("firstPage").style.display = "none";
+    document.getElementById("secondPage").style.display = "block";
+
+
+    const header = document.querySelector(".header h1");
+    if (header) header.textContent = type + " - Quality Control";
+}
+</script>
+<script>
+function hideAllPages() {
+    document.getElementById("firstPage").style.display = "none";
+    document.getElementById("secondPage").style.display = "none";
+    document.getElementById("iqcPage").style.display = "none";
+    document.getElementById("ftqcPage").style.display = "none";
+    document.getElementById("generalPage").style.display = "none";
+}
+
+function openPage(type) {
+    hideAllPages();
+
+    if (type === "IPQC") {
+        document.getElementById("secondPage").style.display = "block";
+    } 
+    else if (type === "IQC") {
+        document.getElementById("iqcPage").style.display = "block";
+    } 
+    else if (type === "FTQC") {
+        document.getElementById("ftqcPage").style.display = "block";
+    } 
+    else if (type === "GENERAL") {
+        document.getElementById("generalPage").style.display = "block";
+    }
+}
+
+function goBackHome() {
+    hideAllPages();
+    document.getElementById("firstPage").style.display = "flex";
+}
+</script>
+<script>
+function showIQCInfo() {
+    document.getElementById("iqcInfoPopup").style.display = "flex";
+}
+
+function closeIQCInfo() {
+    document.getElementById("iqcInfoPopup").style.display = "none";
+}
+</script>
+<script>
+function showFTQCInfo() {
+    document.getElementById("ftqcInfoPopup").style.display = "flex";
+}
+
+function closeFTQCInfo() {
+    document.getElementById("ftqcInfoPopup").style.display = "none";
+}
+</script>
+
+<script>
+
+function globalSearch(){
+
+const query = document
+.getElementById("globalSearch")
+.value
+.toLowerCase()
+.trim();
+
+const resultsBox = document.getElementById("searchResults");
+resultsBox.innerHTML = "";
+
+if(!query){
+resultsBox.innerHTML = "Please enter something to search.";
+return;
+}
+
+const pages = [
+{ id:"secondPage", name:"IPQC" },
+{ id:"iqcPage", name:"IQC" },
+{ id:"ftqcPage", name:"FTQC" },
+{ id:"generalPage", name:"GENERAL" }
+];
+
+let results = [];
+
+pages.forEach(page => {
+
+const container = document.getElementById(page.id);
+
+const sections = container.querySelectorAll(".collapsible");
+
+sections.forEach(btn => {
+
+const sectionName = btn.textContent.trim();
+
+const cards = btn.nextElementSibling.querySelectorAll(".card");
+
+cards.forEach(card => {
+
+const cardText = card.textContent.toLowerCase();
+
+if(cardText.includes(query)){
+
+results.push(
+page.name + " → " + sectionName
+);
+
+}
+
+});
+
+});
+
+});
+
+if(results.length === 0){
+resultsBox.innerHTML = "No results found.";
+return;
+}
+
+let html = "<b>Found in:</b><br><br>";
+
+results.forEach(r => {
+html += "• " + r + "<br>";
+});
+
+resultsBox.innerHTML = html;
+
+}
+
+</script>
+<script>
+
+document.getElementById("globalSearch")
+.addEventListener("keydown", function(e){
+
+if(e.key === "Enter"){
+globalSearch();
+}
+
+});
+
+</script>
+<script>
+
+const pages = [
+{ id:"secondPage", name:"IPQC" },
+{ id:"iqcPage", name:"IQC" },
+{ id:"ftqcPage", name:"FTQC" },
+{ id:"generalPage", name:"GENERAL" }
+];
+
+document.getElementById("globalSearch")
+.addEventListener("input", function(){
+
+const query = this.value.toLowerCase().trim();
+const resultsBox = document.getElementById("searchResults");
+
+resultsBox.innerHTML = "";
+
+if(!query) return;
+
+let results = [];
+
+pages.forEach(page=>{
+
+const container = document.getElementById(page.id);
+
+const sections = container.querySelectorAll(".collapsible");
+
+sections.forEach(btn=>{
+
+const sectionName = btn.textContent.replace("+","").trim();
+
+const cards = btn.nextElementSibling.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+const cardName = card.textContent.trim().toLowerCase();
+
+if(cardName.includes(query)){
+
+results.push({
+page:page.id,
+pageName:page.name,
+section:btn,
+sectionName:sectionName,
+card:card,
+cardName:card.textContent.trim()
+});
+
+}
+
+});
+
+});
+
+});
+
+if(results.length===0){
+
+resultsBox.innerHTML="No results found.";
+return;
+
+}
+
+results.forEach(r=>{
+
+const div=document.createElement("div");
+
+div.className="result-item";
+
+div.innerHTML=
+"<b>"+r.cardName+"</b><br>"+
+r.pageName+" / "+r.sectionName;
+
+div.onclick = function () {
+
+    hideAllPages();
+
+    document.getElementById(r.page).style.display = "block";
+
+    const content = r.section.nextElementSibling;
+
+    content.style.display = "block";
+
+    r.section.querySelector("span").innerText = "−";
+
+    // Scroll to the card
+    r.card.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    // Remove previous highlights
+    document.querySelectorAll(".highlight-card").forEach(card => {
+        card.classList.remove("highlight-card");
+    });
+
+    // Highlight this card
+    r.card.classList.add("highlight-card");
+
+    // Remove highlight after 2 seconds
+    setTimeout(() => {
+        r.card.classList.remove("highlight-card");
+    }, 2000);
+
+    resultsBox.innerHTML = "";
+    document.getElementById("globalSearch").value = "";
+};
+resultsBox.appendChild(div);
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>
